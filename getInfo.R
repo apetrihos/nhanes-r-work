@@ -1,0 +1,1 @@
+getInfo <- function(var) attr(var, 'questionInfo')

@@ -1,0 +1,1 @@
+getQtxt <- function(var) attr(var, 'questionText')
