@@ -1,2 +1,2 @@
-# rProjects
-# This is going to be my main repository for general R Projects
+# nhanes-r-work
+# Playing with the nhanes dataset in R
