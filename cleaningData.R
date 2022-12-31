@@ -14,9 +14,10 @@ library(dplyr)
 ## I AM TRYING TO USE A VARIETY OF PACKAGES AND METHODS TO DEMONSTRATE MASTERY
 
 ## Sourcing Functions
-list.files(pattern = '\\.R$') %>% 
-  setdiff(., 'cleaningData.R') %>% ## REMOVE THIS FILE FROM SOURCE
-  sapply(., source)
+require('niftyTools')
+
+## IF YOU DON'T HAVE MY COMPANION PACKAGE DOWNLOAD HERE
+#devtools::install_github('https://github.com/apetrihos/niftyTools')
 
 ## COLLATING ALL DATA FILES AND MERGING ####
 
@@ -26,7 +27,7 @@ dataIndex <- nhanesA::nhanesTables('Q', '2009')
 ## EXTRACTING THE DATA
 allDataList <- pbapply::pblapply(dataIndex$Data.File.Name, nhanes)
 
-allDataDF <- purrr::reduce(allDataList, customReduce)
+allDataDF <- merge_dataframe_list(allDataList, matching_key = 'SEQN')
 
 dataNamesIndex <- sapply(allDataList, names) %>% 
   purrr::set_names(dataIndex$Data.File.Name)
@@ -75,7 +76,7 @@ dataNamesIndex <- dataNamesIndex[1:length(allDataList)-1]
 ## WE NEED TO RERUN THE REDUCE CALL THOUGH TO HAVE THE CORRECT NAMES
 ## WITHOUT THE .x or .y
 
-allDataDF <- purrr::reduce(allDataList, customReduce)
+allDataDF <- merge_dataframe_list(allDataList, matching_key = 'SEQN')
 
 # LETS CHECK FOR DUPLICATE NAMES ONE MORE TIME
 
