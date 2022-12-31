@@ -21,7 +21,7 @@ list.files(pattern = '\\.R$') %>%
 ## COLLATING ALL DATA FILES AND MERGING ####
 
 ## INDEX OF DATA FILES 
-dataIndex <- nhanesA::nhanesTables('Q', '2007')
+dataIndex <- nhanesA::nhanesTables('Q', '2009')
 
 ## EXTRACTING THE DATA
 allDataList <- pbapply::pblapply(dataIndex$Data.File.Name, nhanes)
@@ -131,7 +131,7 @@ for(varName in setdiff(names(allDataDF), 'SEQN')) {
                                    value = metaData$`English Text:`)
   
   allDataDF[[varName]] <- set_attr(allDataDF[[varName]], 
-                                   which = 'questionInfo', 
+                                   which = 'generalInfo', 
                                    value = metaData$`SAS Label:`)
   
   ## LETS RECODE ALL THE VARIABLES THAT NEED IT
